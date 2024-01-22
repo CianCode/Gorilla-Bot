@@ -32,12 +32,31 @@ class MemberSelect(discord.ui.Select):
         Embed = discord.Embed(description=f"{membersName.mention} a été sélectionné comme la personne à avoir aider le plus dans se thread \n Il a reçu {reputRecieved} point de reputation !", color=0xff78a7)
         await interaction.response.send_message(embed=Embed, ephemeral=False)
 
+        guild = interaction.guild
+        channel = self.bot.get_channel(1198778272226492426)
+
+        reputation_roles = {
+            10: discord.utils.get(guild.roles, name='Debutant'),
+            15: discord.utils.get(guild.roles, name='Intermédiaire'),
+            20: discord.utils.get(guild.roles, name='Pro'),
+        }
+
+        last_role = None
+        for reputation, role in sorted(reputation_roles.items()):
+            if userData["reputation"] >= reputation:
+                if last_role and last_role in membersName.roles:
+                    await membersName.remove_roles(last_role)
+                if role not in membersName.roles:
+                    await membersName.add_roles(role)
+                    embed = discord.Embed(description=f"{membersName.mention} a attein {reputation} de réputations et reçois donc le rôle developer {role.name}!", color=0xfffb7d)
+                    await channel.send(embed=embed)
+                last_role = role
+
         forum = interaction.channel.parent
         all_tags = forum.available_tags
         tag = discord.utils.get(all_tags, name="Résolu")
 
         await interaction.channel.edit(locked=True, applied_tags=[tag])
-
 
         
 

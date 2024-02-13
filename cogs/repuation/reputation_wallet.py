@@ -8,7 +8,7 @@ class ReputationWallet(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @app_commands.command(name="reputation", description="Indiquer que le thread est résolu.")
+    @app_commands.command(name="reputation", description="Affiche le nombre de points de reputation que vous avez !")
     async def reputation(self, interaction: discord.Interaction):
         db = self.bot.mongoConnect["Gorilla"]
         collection = db["Reputation"]

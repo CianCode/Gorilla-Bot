@@ -47,7 +47,11 @@ class MemberSelect(discord.ui.Select):
                     await membersName.remove_roles(last_role)
                 if role not in membersName.roles:
                     await membersName.add_roles(role)
-                    embed = discord.Embed(description=f"{membersName.mention} a attein {reputation} de réputations et reçois donc le rôle developer {role.name}!", color=0xfffb7d)
+                    embed = discord.Embed(description=f"{membersName.mention} a attein {reputation} de réputations et reçois donc le rôle {role.mention}!",
+                                          color=0xfffb7d).set_author(
+                                          name= membersName.display_name, 
+                                          icon_url= membersName.display_avatar)
+                    
                     await channel.send(embed=embed)
                 last_role = role
 

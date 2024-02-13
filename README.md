@@ -23,6 +23,8 @@ Pour lancer se bot vous devrez ajouter c'est variable dans fotre fichier **.env*
 
 `DB_CONNECTION`
 
+`VERSION`
+
 
 ## Authors
 

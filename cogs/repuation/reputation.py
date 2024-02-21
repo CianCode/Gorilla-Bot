@@ -23,7 +23,7 @@ class MemberSelect(discord.ui.Select):
 
         userData = await collection.find_one({"_id": selected_member_id})
 
-        reputRecieved = 5
+        reputRecieved = 20
 
         userData["reputation"] += reputRecieved
         await collection.replace_one({"_id": selected_member_id}, userData)
